@@ -16,7 +16,7 @@ flowchart LR
   I[Private Intelligence on laptop] -->|Read-only report-view CLI| E[Public allowlist exporter]
   E --> A[Local public JSON archive]
   A --> W[Astro static build]
-  W -->|Outbound upload| C[Cloudflare Pages]
+  W -->|Outbound upload| C[Cloudflare Workers Static Assets]
   C --> R[Public readers]
 ```
 
@@ -63,7 +63,8 @@ imports or cross-repository database reads. For another backend, implement those
 contracts or produce the [public JSON schema](schemas/publication.schema.json).
 
 Copy `config/publisher.example.json` to `.local/publisher-config.json` and set its
-four fields. Use absolute filesystem paths and your Cloudflare Pages project name.
+four fields. Use absolute filesystem paths; `project_name` is your Cloudflare
+Worker name.
 Keep the config and exported reports ignored and local.
 
 ```sh
@@ -82,18 +83,22 @@ their first publication timestamp; changed contents under the same ID fail expor
 Only the latest producer view is collected per run: missed intermediate reports
 are not automatically backfilled while the laptop is asleep or off.
 
-## Cloudflare Pages deployment
+## Cloudflare Workers Static Assets deployment
 
 Authenticate directly with Cloudflare; never put credentials in this repository:
 
 ```sh
-WRANGLER_SEND_METRICS=false npm exec -- wrangler login --scopes account:read user:read pages:write
-WRANGLER_SEND_METRICS=false npm exec -- wrangler pages project create zilnon-open --production-branch main
+WRANGLER_SEND_METRICS=false npm exec -- wrangler login --scopes account:read user:read workers:write
 python3 -m publisher.publish --config /ABSOLUTE/PATH/.local/publisher-config.json --deploy
 ```
 
-Use the name from your config when creating the project. The runner uploads only
-`dist/`; GitHub contains source and synthetic fixtures, not the live archive.
+Complete the browser sign-in and authorize Wrangler. The first deployment creates
+the Worker under the `project_name` in your local config. If the account has no
+`workers.dev` subdomain yet, complete that account setup before unattended uploads.
+`wrangler.jsonc` serves only the static files in `dist/`, with no Worker script,
+API, database binding, or public connection to the laptop. GitHub contains source
+and synthetic fixtures, not the live archive. Existing Pages login permissions do
+not grant Worker deployment permission; sign in with the scopes above.
 Cloudflare authentication stays in Wrangler's local credential store or its
 documented environment variables. Build processes do not receive Cloudflare API
 token environment variables. Commit source before deploying: dirty source forces
@@ -132,8 +137,8 @@ Check `.local/publisher.log`, `.local/publisher-error.log`, and the publication 
 file for local status. Stop the job with `launchctl bootout` before changing its
 configuration. Rotate or remove local logs as needed.
 
-To roll back a cloud release, select a previous production deployment in the
-Cloudflare Pages dashboard. Pause the local job first so it cannot republish the
+To roll back a cloud release, restore a previous version in the Worker's Deployments
+view in the Cloudflare dashboard. Pause the local job first so it cannot republish the
 newer version. Back up `.local/publication/catalog.json` if you need to preserve
 the public archive; a source checkout alone cannot recover historical reports.
 

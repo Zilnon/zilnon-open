@@ -8,7 +8,7 @@ web
 
 ## Stack
 
-Astro and TypeScript, accepted in the architecture discussion. Build a static site locally and publish its public snapshots to Cloudflare Pages. Python standard-library tools adapt existing producer contracts.
+Astro and TypeScript, accepted in the architecture discussion. Build a static site locally and publish its public snapshots to Cloudflare Workers Static Assets, with no Worker script or backend bindings. Python standard-library tools adapt existing producer contracts.
 
 ## Users
 

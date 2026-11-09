@@ -55,9 +55,23 @@ class PublisherTests(unittest.TestCase):
         self.run_publish(deploy=True)
         self.assertEqual(self.stages(), ["Collection", "Build", "Collection", "Collection", "Build", "Deployment", "Collection"])
         deployment = next(command for stage, command, _ in self.calls if stage == "Deployment")
-        self.assertEqual(deployment, [str(self.root / "node_modules/.bin/wrangler"), "pages", "deploy",
-                                     str(self.root / "dist"), "--project-name", "zilnon-open", "--branch", "main"])
+        self.assertEqual(deployment, [str(self.root / "node_modules/.bin/wrangler"), "deploy", "--config",
+                                     str(self.root / "wrangler.jsonc"), "--name", "zilnon-open"])
+        self.assertEqual(self.state()["deployed"]["platform"], "workers-static-assets")
         self.assertEqual((self.root / ".local/publication-state.json").stat().st_mode & 0o777, 0o600)
+
+    def test_pages_deployment_state_does_not_skip_first_worker_upload(self):
+        self.run_publish()
+        state = self.state()
+        state["deployed"] = {"version": state["built"], "project_name": self.config["project_name"]}
+        (self.root / ".local/publication-state.json").write_text(json.dumps(state))
+        self.calls.clear()
+        self.run_publish(deploy=True)
+        self.assertEqual(self.stages(), ["Collection", "Build", "Deployment"])
+        self.assertEqual(self.state()["deployed"]["platform"], "workers-static-assets")
+        self.calls.clear()
+        self.run_publish(deploy=True)
+        self.assertEqual(self.stages(), ["Collection"])
 
     def test_pending_deployment_rebuilds_after_external_demo_build(self):
         self.run_publish()
