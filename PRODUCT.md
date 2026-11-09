@@ -8,7 +8,7 @@ web
 
 ## Stack
 
-Astro and TypeScript, accepted in the architecture discussion. Build a static site locally and publish its public snapshots to Cloudflare Workers Static Assets, with no Worker script or backend bindings. Python standard-library tools adapt existing producer contracts.
+Astro and TypeScript, accepted in the architecture discussion. Build a static site locally and publish its public snapshots to Cloudflare Pages, with no Functions or backend bindings. Pages supports the selected GoDaddy-managed subdomain through a CNAME without moving the main domain's DNS. Python standard-library tools adapt existing producer contracts.
 
 ## Users
 

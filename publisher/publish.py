@@ -39,7 +39,7 @@ def load_config(path):
         if not isinstance(value[key], str) or not Path(value[key]).is_absolute():
             raise PublishError("Configured filesystem paths must be absolute")
     if not isinstance(value["project_name"], str) or not re.fullmatch(r"[a-z0-9][a-z0-9-]{0,57}", value["project_name"]):
-        raise PublishError("Invalid Cloudflare Worker name")
+        raise PublishError("Invalid Cloudflare Pages project name")
     if not os.access(value["intelligence_cli"], os.X_OK) or not Path(value["intelligence_cli"]).is_file():
         raise PublishError("Configured Intelligence CLI must be executable")
     if not Path(value["intelligence_data_dir"]).is_dir():
@@ -117,7 +117,7 @@ def publish(config, *, deploy=False, root=ROOT):
             raise PublishError("Public archive validation failed") from None
         revision = source_revision(root)
         version = {"catalog": catalog, "source_revision": revision}
-        target = {"version": version, "project_name": config["project_name"], "platform": "workers-static-assets"}
+        target = {"version": version, "project_name": config["project_name"], "platform": "cloudflare-pages"}
         deployment_needed = deploy and (revision is None or state["deployed"] != target)
         # Other supported build commands can overwrite dist between runs. Every
         # pending upload therefore uses a fresh build from this validated archive.
@@ -137,8 +137,9 @@ def publish(config, *, deploy=False, root=ROOT):
             state["built"] = version
             atomic_state(state_path, state)
         if deployment_needed:
-            run_command([str(root / "node_modules" / ".bin" / "wrangler"), "deploy", "--config", str(root / "wrangler.jsonc"),
-                         "--name", config["project_name"]],
+            # Wrangler otherwise delegates new Pages targets to Workers in agent sessions.
+            run_command([str(root / "node_modules" / ".bin" / "wrangler"), "pages", "deploy", "dist",
+                         "--project-name", config["project_name"], "--branch", "main", "--force"],
                         cwd=root, env=env, timeout=300, stage="Deployment")
             state["deployed"] = target
             atomic_state(state_path, state)

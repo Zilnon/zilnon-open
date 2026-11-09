@@ -4,7 +4,7 @@ A public reading room for AI-generated US-equity research. Browse company
 fundamentals, news and macro analysis, social research, and a searchable report
 archive. The initial watchlist is **SNDK, MU, AMD, CRDO, and BE**.
 
-Read the live publication at **https://zilnon-open.zilnon-open.workers.dev**.
+Read the live publication at **https://zilnon-open.pages.dev**.
 
 This is the publication layer of the Zilnon concept. The open-source repository
 includes a working website, synthetic examples, a strict public export contract,
@@ -18,7 +18,7 @@ flowchart LR
   I[Private Intelligence on laptop] -->|Read-only report-view CLI| E[Public allowlist exporter]
   E --> A[Local public JSON archive]
   A --> W[Astro static build]
-  W -->|Outbound upload| C[Cloudflare Workers Static Assets]
+  W -->|Outbound upload| C[Cloudflare Pages]
   C --> R[Public readers]
 ```
 
@@ -66,7 +66,7 @@ contracts or produce the [public JSON schema](schemas/publication.schema.json).
 
 Copy `config/publisher.example.json` to `.local/publisher-config.json` and set its
 four fields. Use absolute filesystem paths; `project_name` is your Cloudflare
-Worker name.
+Pages project name.
 Keep the config and exported reports ignored and local.
 
 ```sh
@@ -85,25 +85,28 @@ their first publication timestamp; changed contents under the same ID fail expor
 Only the latest producer view is collected per run: missed intermediate reports
 are not automatically backfilled while the laptop is asleep or off.
 
-## Cloudflare Workers Static Assets deployment
+## Cloudflare Pages deployment
 
 Authenticate directly with Cloudflare; never put credentials in this repository:
 
 ```sh
-WRANGLER_SEND_METRICS=false npm exec -- wrangler login --scopes account:read user:read workers:write workers_scripts:write
+WRANGLER_SEND_METRICS=false npm exec -- wrangler login --scopes account:read user:read pages:write
+WRANGLER_SEND_METRICS=false npm exec -- wrangler pages project create zilnon-open --production-branch main --force
 python3 -m publisher.publish --config /ABSOLUTE/PATH/.local/publisher-config.json --deploy
 ```
 
-Complete the browser sign-in and authorize Wrangler. The first deployment creates
-the Worker under the `project_name` in your local config. If the account has no
-`workers.dev` subdomain yet, complete that account setup before unattended uploads.
-`wrangler.jsonc` serves only the static files in `dist/`, with no Worker script,
-API, database binding, or public connection to the laptop. GitHub contains source
-and synthetic fixtures, not the live archive. Existing Pages login permissions do
-not grant Worker deployment permission; sign in with the scopes above. Include
-`workers_scripts:write`: `workers:write` alone does not authorize the deployments
-API. If deployment reports "No access to the specified resource", check the
-granted scopes with `npm exec -- wrangler whoami` and sign in again if needed.
+Complete the browser sign-in and authorize Wrangler, then create the Pages project
+once. Replace `zilnon-open` in the creation command if your local `project_name`
+differs. The production branch is `main`; the publisher targets it explicitly.
+Wrangler 4.158 can delegate new Pages projects to Workers when run by an agent.
+`--force` selects the direct Pages path needed for an external-DNS subdomain; it
+does not overwrite a project. The publisher also pins that choice on upload.
+`wrangler.jsonc` uploads only the static files in `dist/`, with no Functions,
+database binding, or public connection to the laptop. A top-level `404.html`
+preserves missing-page responses instead of enabling Pages' SPA fallback.
+GitHub contains source and synthetic fixtures, not the live archive. Existing
+Workers login permissions do not grant Pages publishing permission. If access is
+denied, check the granted scopes with `npm exec -- wrangler whoami`.
 Cloudflare authentication stays in Wrangler's local credential store or its
 documented environment variables. Build processes do not receive Cloudflare API
 token environment variables. Commit source before deploying: dirty source forces
@@ -114,6 +117,18 @@ successful deployments. Every pending upload builds fresh to prevent an unrelate
 demo build from being uploaded. Failed collection, validation, or builds leave
 the existing cloud site unchanged; failed uploads are retried on the next run with
 a fresh build. `.local/publication-state.json` records successful stages.
+
+For a subdomain managed outside Cloudflare, add the full hostname under the Pages
+project's **Custom domains** first. Then add a CNAME at the existing DNS provider
+pointing to the assigned `<project>.pages.dev` hostname. Domain registration and
+the main domain's nameservers remain with the existing provider. Wait for the
+custom domain's DNS validation and HTTPS activation before using it publicly.
+See [Cloudflare's subdomain setup](https://developers.cloudflare.com/pages/configuration/custom-domains/#add-a-custom-subdomain).
+
+To migrate an existing Workers publication, pause the scheduled publisher, deploy
+and verify Pages, then resume the job. The platform marker forces the first Pages
+upload even when the public catalog is unchanged. Retain the previous cloud
+deployment until the new site is verified; no private producer contract changes.
 
 ## Scheduled publication on macOS
 
@@ -142,7 +157,7 @@ Check `.local/publisher.log`, `.local/publisher-error.log`, and the publication 
 file for local status. Stop the job with `launchctl bootout` before changing its
 configuration. Rotate or remove local logs as needed.
 
-To roll back a cloud release, restore a previous version in the Worker's Deployments
+To roll back a cloud release, restore a previous production deployment in the Pages project's Deployments
 view in the Cloudflare dashboard. Pause the local job first so it cannot republish the
 newer version. Back up `.local/publication/catalog.json` if you need to preserve
 the public archive; a source checkout alone cannot recover historical reports.
