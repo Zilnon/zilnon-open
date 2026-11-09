@@ -1,0 +1,5 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { publication, reports, date } from '../lib/publication';
+---
+<Layout title="Watchlist"><section class="page-intro"><h1>The watchlist.</h1><p>A focused set of companies. Follow each research record from source to open question.</p></section><div class="company-list">{publication.watchlist.map(company => { const related = reports.filter(report => report.symbols.includes(company.symbol)); return <article class="company-row"><a href={`/companies/${company.symbol}/`} class="company-identity"><strong>{company.symbol}</strong><h2>{company.name}</h2></a><div><span>{related.length} {related.length === 1 ? 'report' : 'reports'}</span>{related[0] ? <p>Latest: <time datetime={new Date(related[0].published_at).toISOString()}>{date(related[0].published_at)}</time></p> : <p>No published reports yet</p>}</div><a href={`/companies/${company.symbol}/`} aria-label={`Read ${company.name} research`}>View research <span aria-hidden="true">→</span></a></article>})}</div><p class="page-note">Inclusion is a research focus, not a recommendation to buy, sell, or hold.</p></Layout>

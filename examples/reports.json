@@ -1,0 +1,457 @@
+{
+  "schema_version": "1.0.0",
+  "published_at": "2026-11-09T00:15:00Z",
+  "watchlist": [
+    {
+      "symbol": "SNDK",
+      "name": "Sandisk"
+    },
+    {
+      "symbol": "MU",
+      "name": "Micron Technology"
+    },
+    {
+      "symbol": "AMD",
+      "name": "Advanced Micro Devices"
+    },
+    {
+      "symbol": "CRDO",
+      "name": "Credo Technology"
+    },
+    {
+      "symbol": "BE",
+      "name": "Bloom Energy"
+    }
+  ],
+  "reports": [
+    {
+      "id": "fundamental-2026-11-09-memory-questions",
+      "kind": "fundamental",
+      "title": "Memory demand: the questions behind the narrative",
+      "symbols": [
+        "SNDK",
+        "MU"
+      ],
+      "as_of": "2026-11-09T00:00:00Z",
+      "generated_at": "2026-11-09T00:05:00Z",
+      "published_at": "2026-11-09T00:15:00Z",
+      "status": "complete",
+      "review_status": "unreviewed",
+      "demo": true,
+      "summary": "A demonstration of how a research brief separates business questions from conclusions, with an explicit record of what still needs evidence.",
+      "sections": [
+        {
+          "heading": "Mapping the questions",
+          "paragraphs": [
+            {
+              "text": "How would a researcher distinguish durable demand from a temporary change in ordering patterns? This example outlines the question without claiming an answer for either company.",
+              "kind": "research_question",
+              "source_ids": []
+            }
+          ]
+        },
+        {
+          "heading": "What would change the reading",
+          "paragraphs": [
+            {
+              "text": "A real report would compare the original evidence with alternative explanations and state which additional observations could support or weaken an interpretation. This demonstration makes no investment conclusion.",
+              "kind": "interpretation",
+              "source_ids": []
+            },
+            {
+              "text": "No current filings, market data, or social posts were collected for this demonstration. The linked project source describes the publication software only; it is not evidence about company performance.",
+              "kind": "uncertainty",
+              "source_ids": [
+                "demo-context"
+              ]
+            }
+          ]
+        }
+      ],
+      "metrics": [],
+      "sources": [
+        {
+          "id": "demo-context",
+          "title": "Zilnon Open \u2014 publication software and example context",
+          "url": "https://github.com/Zilnon/zilnon-open",
+          "publisher": "Zilnon",
+          "published_at": null,
+          "published_date": null,
+          "publication_precision": null
+        }
+      ],
+      "limitations": [
+        "Synthetic demonstration only; not actual news or company analysis.",
+        "No financial figures, forecasts, valuation, or trading recommendations are provided.",
+        "Generated text is unreviewed. The example source link is background context, not financial evidence."
+      ]
+    },
+    {
+      "id": "news-2026-11-09-amd-news",
+      "kind": "news",
+      "title": "Reading a product announcement beyond the headline",
+      "symbols": [
+        "AMD"
+      ],
+      "as_of": "2026-11-09T00:00:00Z",
+      "generated_at": "2026-11-09T00:05:00Z",
+      "published_at": "2026-11-09T00:15:00Z",
+      "status": "complete",
+      "review_status": "unreviewed",
+      "demo": true,
+      "summary": "An illustrative news-reading framework: establish what was announced, then separate commercial implications from assumptions.",
+      "sections": [
+        {
+          "heading": "Start with the original announcement",
+          "paragraphs": [
+            {
+              "text": "This synthetic example contains no real product announcement. A published analysis would first identify the original release, its date, and the precise claims it makes.",
+              "kind": "research_question",
+              "source_ids": []
+            }
+          ]
+        },
+        {
+          "heading": "What would change the reading",
+          "paragraphs": [
+            {
+              "text": "A real report would compare the original evidence with alternative explanations and state which additional observations could support or weaken an interpretation. This demonstration makes no investment conclusion.",
+              "kind": "interpretation",
+              "source_ids": []
+            },
+            {
+              "text": "No current filings, market data, or social posts were collected for this demonstration. The linked project source describes the publication software only; it is not evidence about company performance.",
+              "kind": "uncertainty",
+              "source_ids": [
+                "demo-context"
+              ]
+            }
+          ]
+        }
+      ],
+      "metrics": [],
+      "sources": [
+        {
+          "id": "demo-context",
+          "title": "Zilnon Open \u2014 publication software and example context",
+          "url": "https://github.com/Zilnon/zilnon-open",
+          "publisher": "Zilnon",
+          "published_at": null,
+          "published_date": null,
+          "publication_precision": null
+        }
+      ],
+      "limitations": [
+        "Synthetic demonstration only; not actual news or company analysis.",
+        "No financial figures, forecasts, valuation, or trading recommendations are provided.",
+        "Generated text is unreviewed. The example source link is background context, not financial evidence."
+      ]
+    },
+    {
+      "id": "social-2026-11-08-credo-social",
+      "kind": "social",
+      "title": "When a technical discussion becomes an investment claim",
+      "symbols": [
+        "CRDO"
+      ],
+      "as_of": "2026-11-08T00:00:00Z",
+      "generated_at": "2026-11-08T00:05:00Z",
+      "published_at": "2026-11-08T00:15:00Z",
+      "status": "complete",
+      "review_status": "unreviewed",
+      "demo": true,
+      "summary": "A synthetic social-research note on tracing a claim back to its evidence and preserving the difference between attention and verification.",
+      "sections": [
+        {
+          "heading": "Follow the claim, not its reach",
+          "paragraphs": [
+            {
+              "text": "This example does not quote a real social post. In a sourced report, each attributed claim would retain the original author, context, publication time, and accessible source.",
+              "kind": "research_question",
+              "source_ids": []
+            }
+          ]
+        },
+        {
+          "heading": "What would change the reading",
+          "paragraphs": [
+            {
+              "text": "A real report would compare the original evidence with alternative explanations and state which additional observations could support or weaken an interpretation. This demonstration makes no investment conclusion.",
+              "kind": "interpretation",
+              "source_ids": []
+            },
+            {
+              "text": "No current filings, market data, or social posts were collected for this demonstration. The linked project source describes the publication software only; it is not evidence about company performance.",
+              "kind": "uncertainty",
+              "source_ids": [
+                "demo-context"
+              ]
+            }
+          ]
+        }
+      ],
+      "metrics": [],
+      "sources": [
+        {
+          "id": "demo-context",
+          "title": "Zilnon Open \u2014 publication software and example context",
+          "url": "https://github.com/Zilnon/zilnon-open",
+          "publisher": "Zilnon",
+          "published_at": null,
+          "published_date": null,
+          "publication_precision": null
+        }
+      ],
+      "limitations": [
+        "Synthetic demonstration only; not actual news or company analysis.",
+        "No financial figures, forecasts, valuation, or trading recommendations are provided.",
+        "Generated text is unreviewed. The example source link is background context, not financial evidence."
+      ]
+    },
+    {
+      "id": "fundamental-2026-11-08-bloom-fundamentals",
+      "kind": "fundamental",
+      "title": "A framework for reading project economics",
+      "symbols": [
+        "BE"
+      ],
+      "as_of": "2026-11-08T00:00:00Z",
+      "generated_at": "2026-11-08T00:05:00Z",
+      "published_at": "2026-11-08T00:15:00Z",
+      "status": "complete",
+      "review_status": "unreviewed",
+      "demo": true,
+      "summary": "An example of the questions a fundamental brief might ask about project economics, disclosure quality, and comparability.",
+      "sections": [
+        {
+          "heading": "Define the unit of comparison",
+          "paragraphs": [
+            {
+              "text": "Before comparing projects, a researcher would need consistent definitions of scope, timing, and units. No company-specific project economics are asserted in this example.",
+              "kind": "research_question",
+              "source_ids": []
+            }
+          ]
+        },
+        {
+          "heading": "What would change the reading",
+          "paragraphs": [
+            {
+              "text": "A real report would compare the original evidence with alternative explanations and state which additional observations could support or weaken an interpretation. This demonstration makes no investment conclusion.",
+              "kind": "interpretation",
+              "source_ids": []
+            },
+            {
+              "text": "No current filings, market data, or social posts were collected for this demonstration. The linked project source describes the publication software only; it is not evidence about company performance.",
+              "kind": "uncertainty",
+              "source_ids": [
+                "demo-context"
+              ]
+            }
+          ]
+        }
+      ],
+      "metrics": [],
+      "sources": [
+        {
+          "id": "demo-context",
+          "title": "Zilnon Open \u2014 publication software and example context",
+          "url": "https://github.com/Zilnon/zilnon-open",
+          "publisher": "Zilnon",
+          "published_at": null,
+          "published_date": null,
+          "publication_precision": null
+        }
+      ],
+      "limitations": [
+        "Synthetic demonstration only; not actual news or company analysis.",
+        "No financial figures, forecasts, valuation, or trading recommendations are provided.",
+        "Generated text is unreviewed. The example source link is background context, not financial evidence."
+      ]
+    },
+    {
+      "id": "news-2026-11-07-micron-news",
+      "kind": "news",
+      "title": "Separating a reported result from its interpretation",
+      "symbols": [
+        "MU"
+      ],
+      "as_of": "2026-11-07T00:00:00Z",
+      "generated_at": "2026-11-07T00:05:00Z",
+      "published_at": "2026-11-07T00:15:00Z",
+      "status": "complete",
+      "review_status": "unreviewed",
+      "demo": true,
+      "summary": "A structural demonstration of an earnings-related news note, without invented results, guidance, or financial figures.",
+      "sections": [
+        {
+          "heading": "What the source would establish",
+          "paragraphs": [
+            {
+              "text": "This report does not describe an actual earnings release. A real note would identify reported results using the original release and distinguish them from estimates and analyst interpretation.",
+              "kind": "research_question",
+              "source_ids": []
+            }
+          ]
+        },
+        {
+          "heading": "What would change the reading",
+          "paragraphs": [
+            {
+              "text": "A real report would compare the original evidence with alternative explanations and state which additional observations could support or weaken an interpretation. This demonstration makes no investment conclusion.",
+              "kind": "interpretation",
+              "source_ids": []
+            },
+            {
+              "text": "No current filings, market data, or social posts were collected for this demonstration. The linked project source describes the publication software only; it is not evidence about company performance.",
+              "kind": "uncertainty",
+              "source_ids": [
+                "demo-context"
+              ]
+            }
+          ]
+        }
+      ],
+      "metrics": [],
+      "sources": [
+        {
+          "id": "demo-context",
+          "title": "Zilnon Open \u2014 publication software and example context",
+          "url": "https://github.com/Zilnon/zilnon-open",
+          "publisher": "Zilnon",
+          "published_at": null,
+          "published_date": null,
+          "publication_precision": null
+        }
+      ],
+      "limitations": [
+        "Synthetic demonstration only; not actual news or company analysis.",
+        "No financial figures, forecasts, valuation, or trading recommendations are provided.",
+        "Generated text is unreviewed. The example source link is background context, not financial evidence."
+      ]
+    },
+    {
+      "id": "fundamental-2026-11-07-sandisk-fundamentals",
+      "kind": "fundamental",
+      "title": "The evidence needed to understand a business cycle",
+      "symbols": [
+        "SNDK"
+      ],
+      "as_of": "2026-11-07T00:00:00Z",
+      "generated_at": "2026-11-07T00:05:00Z",
+      "published_at": "2026-11-07T00:15:00Z",
+      "status": "complete",
+      "review_status": "unreviewed",
+      "demo": true,
+      "summary": "A synthetic research outline for tracking a business over time while preserving dates, definitions, and unanswered questions.",
+      "sections": [
+        {
+          "heading": "Build a comparable record",
+          "paragraphs": [
+            {
+              "text": "A researcher would assemble dated disclosures and check whether their definitions remain comparable. This illustration supplies no historical dataset and makes no claim about the current cycle.",
+              "kind": "research_question",
+              "source_ids": []
+            }
+          ]
+        },
+        {
+          "heading": "What would change the reading",
+          "paragraphs": [
+            {
+              "text": "A real report would compare the original evidence with alternative explanations and state which additional observations could support or weaken an interpretation. This demonstration makes no investment conclusion.",
+              "kind": "interpretation",
+              "source_ids": []
+            },
+            {
+              "text": "No current filings, market data, or social posts were collected for this demonstration. The linked project source describes the publication software only; it is not evidence about company performance.",
+              "kind": "uncertainty",
+              "source_ids": [
+                "demo-context"
+              ]
+            }
+          ]
+        }
+      ],
+      "metrics": [],
+      "sources": [
+        {
+          "id": "demo-context",
+          "title": "Zilnon Open \u2014 publication software and example context",
+          "url": "https://github.com/Zilnon/zilnon-open",
+          "publisher": "Zilnon",
+          "published_at": null,
+          "published_date": null,
+          "publication_precision": null
+        }
+      ],
+      "limitations": [
+        "Synthetic demonstration only; not actual news or company analysis.",
+        "No financial figures, forecasts, valuation, or trading recommendations are provided.",
+        "Generated text is unreviewed. The example source link is background context, not financial evidence."
+      ]
+    },
+    {
+      "id": "social-2026-11-06-amd-social",
+      "kind": "social",
+      "title": "A useful question is not yet a verified thesis",
+      "symbols": [
+        "AMD",
+        "CRDO"
+      ],
+      "as_of": "2026-11-06T00:00:00Z",
+      "generated_at": "2026-11-06T00:05:00Z",
+      "published_at": "2026-11-06T00:15:00Z",
+      "status": "complete",
+      "review_status": "unreviewed",
+      "demo": true,
+      "summary": "An example of turning public commentary into questions for further work without treating the commentary as established fact.",
+      "sections": [
+        {
+          "heading": "Turn commentary into testable questions",
+          "paragraphs": [
+            {
+              "text": "No real creator or social account is represented here. The example illustrates how a claim could become a research question that requires independent evidence.",
+              "kind": "research_question",
+              "source_ids": []
+            }
+          ]
+        },
+        {
+          "heading": "What would change the reading",
+          "paragraphs": [
+            {
+              "text": "A real report would compare the original evidence with alternative explanations and state which additional observations could support or weaken an interpretation. This demonstration makes no investment conclusion.",
+              "kind": "interpretation",
+              "source_ids": []
+            },
+            {
+              "text": "No current filings, market data, or social posts were collected for this demonstration. The linked project source describes the publication software only; it is not evidence about company performance.",
+              "kind": "uncertainty",
+              "source_ids": [
+                "demo-context"
+              ]
+            }
+          ]
+        }
+      ],
+      "metrics": [],
+      "sources": [
+        {
+          "id": "demo-context",
+          "title": "Zilnon Open \u2014 publication software and example context",
+          "url": "https://github.com/Zilnon/zilnon-open",
+          "publisher": "Zilnon",
+          "published_at": null,
+          "published_date": null,
+          "publication_precision": null
+        }
+      ],
+      "limitations": [
+        "Synthetic demonstration only; not actual news or company analysis.",
+        "No financial figures, forecasts, valuation, or trading recommendations are provided.",
+        "Generated text is unreviewed. The example source link is background context, not financial evidence."
+      ]
+    }
+  ]
+}

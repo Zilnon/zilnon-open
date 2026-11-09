@@ -1,0 +1,9 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ReportRow from '../../components/ReportRow.astro';
+import { publication, reports } from '../../lib/publication';
+export function getStaticPaths() { return publication.watchlist.map(company => ({ params: { symbol: company.symbol }, props: { company } })); }
+const { company } = Astro.props;
+const related = reports.filter(report => report.symbols.includes(company.symbol));
+---
+<Layout title={`${company.symbol} · ${company.name}`}><div class="breadcrumb"><a href="/watchlist/">Watchlist</a><span aria-hidden="true">/</span><span>{company.symbol}</span></div><section class="page-intro"><h1>{company.name}</h1><p>{company.symbol} · Company research record</p></section><div class="section-heading"><h2>Published research</h2><span>{related.length} {related.length === 1 ? 'report' : 'reports'}</span></div>{related.length ? related.map(report => <ReportRow report={report} />) : <div class="empty-state"><h3>No published research yet.</h3><p>This company is on the watchlist. Completed reports will appear here once published.</p><a href="/archive/">Explore other reports →</a></div>}<p class="page-note">Read individual reports for their evidence cutoff, sources, and limitations.</p></Layout>

@@ -1,0 +1,12 @@
+Zilnon Open
+Copyright 2026 Zilnon
+
+The website, publication adapters and synthetic examples in this repository
+are original implementations. They consume versioned report interfaces; no
+implementation from the private Engine, Monitor or other imported product
+codebases is bundled here.
+
+Dependencies retain their respective licenses. The source code license does
+not license third-party articles, posts, market data or generated report
+content supplied by an operator. Operators are responsible for selecting
+content they have permission to publish and retaining source attribution.

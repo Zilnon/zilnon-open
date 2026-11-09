@@ -1,0 +1,6 @@
+{
+  "intelligence_cli": "/ABSOLUTE/PATH/TO/zilnon-intelligence/.venv/bin/zilnon-intelligence",
+  "intelligence_data_dir": "/ABSOLUTE/PATH/TO/private-intelligence-data",
+  "output_file": "/ABSOLUTE/PATH/TO/zilnon-open/.local/publication/catalog.json",
+  "project_name": "zilnon-open"
+}

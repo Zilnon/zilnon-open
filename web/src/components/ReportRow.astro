@@ -1,0 +1,10 @@
+---
+import { date, labels, type Report } from '../lib/publication';
+interface Props { report: Report; featured?: boolean }
+const { report, featured = false } = Astro.props;
+---
+<article class:list={['report-row', { featured }]} data-report data-kind={report.kind} data-symbols={report.symbols.join(' ')} data-search={`${report.title} ${report.summary} ${report.symbols.join(' ')}`.toLowerCase()}>
+  <div class="report-date"><time datetime={new Date(report.published_at).toISOString()}>{date(report.published_at)}</time><span>{labels[report.kind]}</span></div>
+  <div class="report-content"><h3><a href={`/reports/${report.id}/`}>{report.title}</a></h3><p>{report.summary}</p><div class="report-meta"><span>{report.symbols.join(' · ')}</span><span>Generated · Unreviewed{report.demo ? ' · Synthetic' : ''}</span></div></div>
+  <a class="read-link" href={`/reports/${report.id}/`} aria-label={`Read ${report.title}`}><span>Read report</span><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 12h15m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.5"/></svg></a>
+</article>

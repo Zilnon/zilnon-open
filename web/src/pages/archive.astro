@@ -1,0 +1,38 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ReportRow from '../components/ReportRow.astro';
+import { publication, reports } from '../lib/publication';
+---
+<Layout title="Research archive"><section class="page-intro"><h1>The research archive.</h1><p>A record you can return to. Find a company, explore a theme, or read across the evidence.</p></section><form id="filters" class="filters" role="search"><div class="search-field"><label for="search">Search reports</label><input id="search" name="q" type="search" placeholder="Search titles, summaries, or symbols" /></div><div><label for="kind">Research type</label><select id="kind" name="kind"><option value="">All research</option><option value="fundamental">Fundamentals</option><option value="news">News analysis</option><option value="social">Social research</option></select></div><div><label for="symbol">Company</label><select id="symbol" name="symbol"><option value="">All companies</option>{publication.watchlist.map(company => <option value={company.symbol}>{company.symbol} · {company.name}</option>)}</select></div><button type="reset">Clear filters</button></form><noscript><p class="page-note">Filtering needs JavaScript. All published reports are available below.</p></noscript><p id="result-count" class="result-count" role="status" aria-live="polite">{reports.length} reports</p><div id="archive-reports">{reports.map(report => <ReportRow report={report} />)}</div><div id="empty-results" class="empty-state" hidden={reports.length > 0}><h2>No reports found.</h2><p>Try another search, research type, or company.</p><button id="clear-empty" type="button">Clear all filters</button></div></Layout>
+<script>
+  const form = document.querySelector<HTMLFormElement>('#filters')!;
+  const search = document.querySelector<HTMLInputElement>('#search')!;
+  const kind = document.querySelector<HTMLSelectElement>('#kind')!;
+  const symbol = document.querySelector<HTMLSelectElement>('#symbol')!;
+  const rows = Array.from(document.querySelectorAll<HTMLElement>('[data-report]'));
+  const params = new URLSearchParams(location.search);
+  search.value = params.get('q') || '';
+  kind.value = params.get('kind') || '';
+  symbol.value = params.get('symbol') || '';
+  function filter() {
+    const query = search.value.trim().toLowerCase();
+    let count = 0;
+    rows.forEach(row => {
+      row.hidden = !(row.dataset.search?.includes(query) && (!kind.value || row.dataset.kind === kind.value) && (!symbol.value || row.dataset.symbols?.split(' ').includes(symbol.value)));
+      if (!row.hidden) count++;
+    });
+    document.querySelector('#result-count')!.textContent = `${count} ${count === 1 ? 'report' : 'reports'}`;
+    document.querySelector<HTMLElement>('#empty-results')!.hidden = count > 0;
+    const params = new URLSearchParams();
+    if (query) params.set('q', search.value.trim());
+    if (kind.value) params.set('kind', kind.value);
+    if (symbol.value) params.set('symbol', symbol.value);
+    history.replaceState(null, '', location.pathname + (params.size ? '?' + params.toString() : ''));
+  }
+  form.addEventListener('submit', event => { event.preventDefault(); filter(); });
+  form.addEventListener('input', filter);
+  form.addEventListener('change', filter);
+  form.addEventListener('reset', () => { search.value = ''; kind.value = ''; symbol.value = ''; filter(); });
+  document.querySelector('#clear-empty')!.addEventListener('click', () => { form.reset(); search.focus(); });
+  filter();
+</script>

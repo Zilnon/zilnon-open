@@ -1,0 +1,17 @@
+node_modules/
+dist/
+.astro/
+web/.astro/
+.local/
+.env
+.env.*
+!.env.example
+__pycache__/
+*.py[cod]
+.DS_Store
+*.log
+.wrangler/
+.impeccable/review/
+.impeccable/config.local.json
+.playwright-cli/
+output/playwright/

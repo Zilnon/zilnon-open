@@ -1,0 +1,16 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ReportRow from '../components/ReportRow.astro';
+import { publication, reports, date, type Kind } from '../lib/publication';
+const featured = reports[0];
+const researchTypes: { kind: Kind; label: string }[] = [{ kind: 'fundamental', label: 'Fundamentals' }, { kind: 'news', label: 'News & macro' }, { kind: 'social', label: 'Social' }];
+const latestByType = researchTypes.map(type => ({ ...type, report: reports.find(report => report.kind === type.kind) })).filter(type => type.report);
+---
+<Layout title="Latest brief">
+  <section class="intro"><div><h1>Research,<br />in the open.</h1><p class="intro-copy">A considered record of companies, news, and the questions worth following. Read the evidence. Keep the uncertainty in view.</p></div><div class="edition"><span>Latest publication</span><time datetime={new Date(publication.published_at).toISOString()}>{date(publication.published_at, true)}</time><p>Fundamentals, news analysis,<br />and social research.</p><a href="/about/">How to read these reports <span aria-hidden="true">↗</span></a></div></section>
+  <div class="watch-strip"><span>Following</span><div>{publication.watchlist.map(company => <a href={`/companies/${company.symbol}/`} title={company.name}>{company.symbol}</a>)}</div><a class="quiet-link" href="/watchlist/">View watchlist <span aria-hidden="true">→</span></a></div>
+  {latestByType.length > 0 && <nav class="research-types" aria-label="Latest reports by research type"><span>Latest by type</span>{latestByType.map(type => <a href={`/reports/${type.report!.id}/`}>{type.label} <span aria-hidden="true">→</span></a>)}</nav>}
+  <section class="latest-section"><div class="section-heading"><h2>The latest brief</h2><span>Published reports · {reports.length}</span></div>{featured ? <ReportRow report={featured} featured /> : <div class="empty-state"><h3>No published reports yet.</h3><p>Completed research will appear here after publication. Explore the <a href="/watchlist/">watchlist</a> in the meantime.</p></div>}</section>
+  {reports.length > 1 && <section><div class="section-heading"><h2>Recent research</h2><a href="/archive/">Browse the archive <span aria-hidden="true">→</span></a></div>{reports.slice(1, 5).map(report => <ReportRow report={report} />)}</section>}
+  <section class="reading-note"><h2>Sources first.<br />Conclusions with context.</h2><div><p>Each report separates sourced facts, interpretation, and open questions. Evidence time, generation time, and publication time stay visible.</p><a href="/about/">Read the methodology <span aria-hidden="true">→</span></a></div></section>
+</Layout>

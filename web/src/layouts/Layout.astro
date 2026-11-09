@@ -1,0 +1,30 @@
+---
+import '../styles/global.css';
+import { publication } from '../lib/publication';
+interface Props { title: string; description?: string }
+const { title, description = 'Public company research, with sources, uncertainty, and a visible record of publication.' } = Astro.props;
+const path = Astro.url.pathname;
+const navigation = [['/', 'Latest brief'], ['/watchlist/', 'Watchlist'], ['/archive/', 'Archive'], ['/about/', 'Methodology']];
+const demo = publication.reports.some(report => report.demo);
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="color-scheme" content="light" />
+    <title>{title === 'Latest brief' ? 'Zilnon Open — Research, in the open' : `${title} · Zilnon Open`}</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header shell">
+      <a class="brand" href="/" aria-label="Zilnon Open home">Zilnon <span>Open</span><svg aria-hidden="true" viewBox="0 0 28 28" fill="none"><path d="M4 5h20L4 23h20M24 5v8M4 23v-8" stroke="currentColor" stroke-width="1.5"/></svg></a>
+      <nav aria-label="Main navigation">{navigation.map(([href, label]) => <a href={href} aria-current={path === href ? 'page' : undefined}>{label}</a>)}</nav>
+    </header>
+    {demo && <aside class="demo-notice"><div class="shell"><strong>Demonstration edition.</strong> Synthetic reports show the reading experience. They are not actual financial news or company analysis.</div></aside>}
+    <main id="main" class="shell"><slot /></main>
+    <footer class="site-footer shell"><div><a class="footer-brand" href="/">Zilnon Open</a><p>Research to read. Decisions remain yours.</p><p>Generated reports are unreviewed. Not investment advice.</p></div><div class="footer-links"><a href="/about/">Methodology & limitations</a><a href="https://github.com/Zilnon/zilnon-open" rel="noreferrer">Source code ↗</a><span>All times in Singapore · SGT (UTC+8)</span></div></footer>
+  </body>
+</html>
