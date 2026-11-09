@@ -107,6 +107,21 @@ class ExportTests(unittest.TestCase):
         result = project_view(item, kind, NOW)
         self.assertTrue(any("Some configured source coverage was incomplete" in value for value in result["limitations"]))
 
+    def test_date_only_archive_retains_catalog_on_repeat(self):
+        item = view("news")
+        item["report"]["sources"][0].update(
+            published_at=None, published_date="2026-11-08", publication_precision="date")
+        def reader(executable, data_dir, kind, symbol=None):
+            return deepcopy(item) if kind == "news" else empty(kind)
+        with tempfile.TemporaryDirectory() as directory:
+            output = Path(directory) / "catalog.json"
+            first = export_publication("unused", "unused", output, now=NOW, reader=reader)
+            self.assertIs(validate_publication(first), first)
+            original = output.read_bytes()
+            repeated = export_publication("unused", "unused", output, now=LATER, reader=reader)
+            self.assertEqual(repeated, first)
+            self.assertEqual(output.read_bytes(), original)
+
     def test_unsafe_source_urls_rejected(self):
         for url in ("http://example.com/a", "https://user:pass@example.com/a", "https://localhost/a", "https://10.1.2.3/a", "https://127.0.0.1/a", "https://host.internal/a", "https://example.com/a?api_key=private", "https://example.com:8443/a"):
             with self.subTest(url=url), self.assertRaises(PublicationError):

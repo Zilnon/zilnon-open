@@ -119,10 +119,10 @@ def validate_publication(value):
             if source["published_at"] is not None:
                 timestamp(source["published_at"])
             if source["published_date"] is not None:
-                value = source["published_date"]
-                require(isinstance(value, str) and re.fullmatch(r"\d{4}-\d{2}-\d{2}", value), "Invalid source publication date")
+                source_date = source["published_date"]
+                require(isinstance(source_date, str) and re.fullmatch(r"\d{4}-\d{2}-\d{2}", source_date), "Invalid source publication date")
                 try:
-                    date.fromisoformat(value)
+                    date.fromisoformat(source_date)
                 except ValueError:
                     raise PublicationError("Invalid source publication date") from None
             precision = source["publication_precision"]
