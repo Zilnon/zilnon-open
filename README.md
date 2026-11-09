@@ -4,6 +4,8 @@ A public reading room for AI-generated US-equity research. Browse company
 fundamentals, news and macro analysis, social research, and a searchable report
 archive. The initial watchlist is **SNDK, MU, AMD, CRDO, and BE**.
 
+Read the live publication at **https://zilnon-open.zilnon-open.workers.dev**.
+
 This is the publication layer of the Zilnon concept. The open-source repository
 includes a working website, synthetic examples, a strict public export contract,
 and a laptop-to-cloud publishing runner. It does not include the private research
