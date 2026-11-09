@@ -88,7 +88,7 @@ are not automatically backfilled while the laptop is asleep or off.
 Authenticate directly with Cloudflare; never put credentials in this repository:
 
 ```sh
-WRANGLER_SEND_METRICS=false npm exec -- wrangler login --scopes account:read user:read workers:write
+WRANGLER_SEND_METRICS=false npm exec -- wrangler login --scopes account:read user:read workers:write workers_scripts:write
 python3 -m publisher.publish --config /ABSOLUTE/PATH/.local/publisher-config.json --deploy
 ```
 
@@ -98,7 +98,10 @@ the Worker under the `project_name` in your local config. If the account has no
 `wrangler.jsonc` serves only the static files in `dist/`, with no Worker script,
 API, database binding, or public connection to the laptop. GitHub contains source
 and synthetic fixtures, not the live archive. Existing Pages login permissions do
-not grant Worker deployment permission; sign in with the scopes above.
+not grant Worker deployment permission; sign in with the scopes above. Include
+`workers_scripts:write`: `workers:write` alone does not authorize the deployments
+API. If deployment reports "No access to the specified resource", check the
+granted scopes with `npm exec -- wrangler whoami` and sign in again if needed.
 Cloudflare authentication stays in Wrangler's local credential store or its
 documented environment variables. Build processes do not receive Cloudflare API
 token environment variables. Commit source before deploying: dirty source forces
