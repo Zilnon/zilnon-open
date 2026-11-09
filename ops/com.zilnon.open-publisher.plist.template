@@ -8,10 +8,10 @@
     <string>__PYTHON_ABSOLUTE_PATH__</string>
     <string>-m</string><string>publisher.publish</string>
     <string>--config</string><string>__CONFIG_ABSOLUTE_PATH__</string>
-    <string>--deploy</string>
   </array>
   <key>WorkingDirectory</key><string>__PROJECT_ABSOLUTE_PATH__</string>
   <key>StartInterval</key><integer>300</integer>
+  <key>RunAtLoad</key><true/>
   <key>EnvironmentVariables</key>
   <dict>
     <key>PATH</key><string>__NODE_BIN_DIRECTORY__:/usr/bin:/bin</string>

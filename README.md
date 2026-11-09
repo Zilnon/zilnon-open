@@ -108,11 +108,23 @@ a fresh build. `.local/publication-state.json` records successful stages.
 ## Scheduled publication on macOS
 
 `ops/com.zilnon.open-publisher.plist.template` checks for completed reports every
-five minutes. It does not generate research. Replace its placeholders with the
+five minutes and when loaded at login. Its default mode updates the local website
+without requiring Cloudflare authentication. It does not generate research.
+Replace its placeholders with the
 absolute Python executable, config, project, and Node executable directory. Save
 the rendered file as `~/Library/LaunchAgents/com.zilnon.open-publisher.plist` after
-one successful authenticated deployment, then load it with `launchctl bootstrap`.
-The source template alone does not activate a background job.
+one successful local publication, then load it:
+
+```sh
+launchctl bootstrap "gui/$(id -u)" "$HOME/Library/LaunchAgents/com.zilnon.open-publisher.plist"
+launchctl print "gui/$(id -u)/com.zilnon.open-publisher"
+```
+
+The source template alone does not activate a background job. Once cloud hosting
+is configured and a manual deployment succeeds, add `--deploy` to the installed
+job's `ProgramArguments` and reload it. Local updates can run throughout hosting
+setup; cloud deployment is an independent step. Reload an already-open browser
+page to see newly published reports.
 
 The laptop must be awake and online. Cloudflare continues serving the previous
 publication while it is offline. No fresh-report delivery SLA is implied.
